@@ -23,5 +23,5 @@
   track.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") go(index + 1); if (e.key === "ArrowLeft") go(index - 1); });
   window.addEventListener("resize", function () { track.style.scrollBehavior = "auto"; go(index); track.style.scrollBehavior = ""; });
   if (photos.length < 2) { document.getElementById("galPrev").hidden = document.getElementById("galNext").hidden = dots.hidden = true; }
-  box.hidden = false; document.getElementById("aboutFallback").hidden = true; mark();
+  box.hidden = false; mark();
 })();

@@ -89,6 +89,8 @@
       return '<div class="line"><img src="' + esc(p.image) + '" alt="" width="60" height="60"><div><h3>' + esc(p.name) + "</h3><small>" + TDT.money(p.price) + ' cada</small><div class="qty"><button type="button" data-dec="' + esc(p.id) + '" aria-label="Diminuir quantidade de ' + esc(p.name) + '">−</button><b>' + l.qty +
         '</b><button type="button" data-inc="' + esc(p.id) + '" aria-label="Aumentar quantidade de ' + esc(p.name) + '">+</button><button type="button" class="rm" data-rm="' + esc(p.id) + '" aria-label="Remover ' + esc(p.name) + '">Remover</button></div><div class="sub">' + TDT.money(l.subtotal) + "</div></div></div>";
     }).join("") : '<div class="cart-empty"><p><strong>Seu carrinho está vazio</strong></p><p>Escolha seus favoritos no cardápio e eles aparecem aqui.</p></div>';
+    $("#orderBar").hidden = !n; document.body.classList.toggle("has-bar", n > 0);
+    $("#barCount").textContent = n + (n === 1 ? " item" : " itens"); $("#barTotal").textContent = TDT.money(TDT.cart.total());
     paintActions();
     $("#checkout").disabled = !lines.length; $("#clear").disabled = !lines.length;
   }
@@ -100,7 +102,7 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeCart(); closeMenu(); } });
   $("#clear").addEventListener("click", function () { if (confirm("Remover todos os itens do carrinho?")) { TDT.cart.clear(); toast("Carrinho limpo"); } });
 
-  $("#checkout").addEventListener("click", function () {
+  function checkout() {
     if (!TDT.cart.count()) { toast("Adicione ao menos um produto para finalizar."); return; }
     var url = TDT.cart.whatsappUrl(), text = TDT.cart.message();
     var w = window.open(url, "_blank", "noopener"), has = TDT.cart.hasPhone();
@@ -111,7 +113,10 @@
     };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
     else done(false);
-  });
+  }
+  $("#checkout").addEventListener("click", checkout);
+  $("#barCheckout").addEventListener("click", checkout);
+  $("#barCart").addEventListener("click", openCart);
 
   setCat("all"); renderCart();
 })();

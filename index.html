@@ -71,7 +71,6 @@
       <button id="galNext" class="gal-btn next" type="button" aria-label="Próxima foto">›</button>
       <div id="galDots" class="gal-dots"></div>
     </div>
-    <img id="aboutFallback" src="assets/images/categories/salgados.svg" alt="Salgado dourado e crocante" loading="lazy" width="400" height="300">
   </div>
 </section>
 
@@ -101,6 +100,10 @@
     <div class="row"><button id="keep" class="btn ghost" type="button">Continuar comprando</button><button id="clear" class="btn ghost" type="button">Limpar carrinho</button></div>
   </div>
 </aside>
+<div id="orderBar" class="order-bar" hidden>
+  <button id="barCart" class="bar-info" type="button" aria-label="Ver carrinho"><span id="barCount"></span><strong id="barTotal"></strong></button>
+  <button id="barCheckout" class="btn" type="button">Finalizar pedido</button>
+</div>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="js/products.js"></script>

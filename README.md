@@ -1,102 +1,36 @@
-# Tem de Tudo V4
+# Tem de Tudo — Landing page e cardápio digital
 
-**Website institucional e comercial — Tens Tudo**
+Site estático (HTML5, CSS3 e JavaScript puro) com cardápio, carrinho e envio do pedido por WhatsApp. Sem backend, banco de dados ou dependências.
 
-Projeto de desenvolvimento web criado para a loja **Tens Tudo**, com o objetivo de estabelecer sua presença digital por meio de uma interface moderna, organizada e responsiva.
-
-O projeto foi desenvolvido sob encomenda e destinado à comercialização, implantação e utilização pela empresa contratante.
-
----
-
-## Sobre o projeto
-
-O **Tem de Tudo V4** é um projeto de desenvolvimento web desenvolvido para atender às necessidades digitais da loja Tens Tudo.
-
-A aplicação busca proporcionar uma experiência de navegação intuitiva, apresentar a identidade comercial do estabelecimento e facilitar o acesso dos clientes às informações disponibilizadas pela loja.
-
-O desenvolvimento prioriza organização estrutural, facilidade de manutenção, responsividade e compatibilidade com diferentes dispositivos.
-
-## Tecnologias e estrutura
-
-O projeto possui uma estrutura organizada para separar os arquivos responsáveis pela apresentação, funcionalidades e recursos visuais.
-
-### Estrutura de diretórios
-
-```text
-tem-de-tudo-V4/
-│
-├── assets/          # Recursos estáticos do projeto
-│
-├── css/             # Folhas de estilo e identidade visual
-│
-├── js/              # Scripts e funcionalidades JavaScript
-│
-├── index.html       # Página principal da aplicação
-│
-├── README.md        # Documentação do projeto
-│
-└── vercel.json      # Configurações de implantação na Vercel
+## Estrutura
+```
+index.html · vercel.json · css/style.css
+js/products.js (config da loja + catálogo) · cart.js · theme.js · main.js
+assets/logo · assets/images/{products,categories,banners}
 ```
 
-### Tecnologias utilizadas
+## Executar localmente
+Abra `index.html` no navegador, ou rode `npx serve .` / `python3 -m http.server` na pasta.
 
-- **HTML5:** estruturação do conteúdo.
-- **CSS3:** estilização, identidade visual e responsividade.
-- **JavaScript:** implementação de funcionalidades e interações.
-- **Vercel:** plataforma de hospedagem e implantação.
+## Editar
+- **Produtos e preços:** `js/products.js`, lista `TDT.PRODUCTS` (`price` em reais; `tags`: `popular`, `new`, `promo`). Imagem em `assets/images/products/`.
+- **Endereço, bairro, cidade e horário:** `TDT.CONFIG` em `js/products.js`. Bairro e cidade estão vazios e passam a valer no Google Maps ao serem preenchidos.
+- **WhatsApp:** `whatsappLink` (link oficial) e, `whatsappPhone` (já configurado com o número da loja).
 
-## Implantação
+## WhatsApp: ponto importante
+O link `wa.me/message/...` abre a conversa, mas **não aceita texto dinâmico**. Por isso, com `whatsappPhone` preenchido o pedido abre já escrito (o resumo também é copiado como reserva); sem ele, o botão "Finalizar pedido" abre o link oficial e **copia o resumo** para a área de transferência (o cliente cola e envia). Para o pedido chegar já preenchido, informe o número da loja em `whatsappPhone` (somente dígitos, com DDI e DDD). Isso precisa da confirmação do dono da loja.
 
-O projeto está estruturado para implantação na plataforma Vercel.
+## Imagens
+As imagens atuais são **ilustrações vetoriais (SVG) provisórias**, não fotografias. Substitua pelos arquivos reais mantendo os nomes, ou altere o campo `image` de cada produto.
 
-O arquivo `vercel.json` contém as configurações específicas de implantação e roteamento da aplicação.
+## Publicar na Vercel
+1. Envie a pasta para um repositório no GitHub.
+2. Na Vercel: **Add New → Project**, importe o repositório.
+3. Framework Preset: **Other**, sem build command. Deploy.
+Ou, pelo terminal: `npx vercel --prod`.
 
-Para realizar alterações ou atualizações, recomenda-se preservar a organização dos diretórios e verificar a compatibilidade das modificações com a estrutura existente.
+## Fotos do estabelecimento
+Copie as fotos (JPG/WebP, até ~1600 px de largura, ~200 KB cada) para `assets/images/estabelecimento/` e liste-as em `TDT.GALLERY` (`js/products.js`). Enquanto a lista estiver vazia, o carrossel fica oculto.
 
-## Manutenção e atualizações
-
-A manutenção do projeto deve considerar os seguintes aspectos:
-
-- Preservação da estrutura original dos arquivos.
-- Organização e padronização dos códigos.
-- Compatibilidade com dispositivos desktop e mobile.
-- Verificação das funcionalidades após atualizações.
-- Manutenção da identidade visual estabelecida para a Tens Tudo.
-
-Modificações estruturais ou funcionais devem ser realizadas com atenção para evitar impactos em outras partes da aplicação.
-
----
-
-## Propriedade intelectual e direitos autorais
-
-**© 2026 — Todos os direitos reservados.**
-
-Este projeto é de autoria e propriedade intelectual de seu desenvolvedor.
-
-Sua comercialização para a empresa **Tens Tudo** não representa uma transferência automática dos direitos autorais ou da titularidade intelectual do código-fonte.
-
-O projeto não é disponibilizado sob licenças de código aberto (Open Source).
-
-É expressamente proibida, sem autorização prévia e por escrito do titular dos direitos:
-
-- A redistribuição ou comercialização do código-fonte por terceiros.
-- A reprodução integral ou parcial do projeto para outros fins comerciais.
-- A publicação ou disponibilização pública não autorizada do código-fonte.
-- A utilização do projeto como base para criação ou comercialização de produtos derivados.
-- A concessão de sublicenças ou transferência dos direitos de propriedade intelectual.
-
-A utilização do sistema pela empresa contratante deverá respeitar as condições estabelecidas no respectivo acordo comercial.
-
-**Importante:** a aquisição de uma licença de utilização não implica, por si só, a aquisição da propriedade intelectual do projeto.
-
-Para solicitações de autorização, licenciamento, manutenção ou desenvolvimento de novas funcionalidades, deverá ser realizado contato diretamente com o desenvolvedor.
-
----
-
-## Considerações finais
-
-O Tem de Tudo V4 foi desenvolvido com foco em qualidade, organização e apresentação profissional, constituindo uma solução digital destinada à loja Tens Tudo.
-
-A documentação poderá ser atualizada conforme a evolução do projeto e a implementação de novas funcionalidades.
-
-**Desenvolvimento e propriedade intelectual: reservados ao autor.**
+## Carrinho
+Usa `sessionStorage`: mantém os itens ao atualizar a página na mesma aba e começa vazio em uma nova visita.
